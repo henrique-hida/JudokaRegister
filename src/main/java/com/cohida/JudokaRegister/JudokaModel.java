@@ -8,12 +8,12 @@ public class JudokaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String name;
-    float weight;
-    int age;
-    Countries country;
-    Obis belt;
+    private Long id;
+    private String name;
+    private float weight;
+    private int age;
+    private Countries country;
+    private Obis belt;
 
     public JudokaModel() {
     }

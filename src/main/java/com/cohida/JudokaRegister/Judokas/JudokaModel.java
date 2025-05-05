@@ -1,9 +1,14 @@
-package com.cohida.JudokaRegister;
+package com.cohida.JudokaRegister.Judokas;
 
+import com.cohida.JudokaRegister.Championships.ChampionshipModel;
+import com.cohida.JudokaRegister.Enums.Countries;
+import com.cohida.JudokaRegister.Enums.Obis;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
-@Table(name = "tb_register")
+@Table(name = "tb_judokas")
 public class JudokaModel {
 
     @Id
@@ -14,6 +19,11 @@ public class JudokaModel {
     private int age;
     private Countries country;
     private Obis belt;
+
+    // Um judoka pode participar somente de um campeonato por vez
+    @ManyToOne
+    @JoinColumn(name = "championship_id") // FK
+    private ChampionshipModel championship;
 
     public JudokaModel() {
     }

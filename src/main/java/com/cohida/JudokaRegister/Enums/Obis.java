@@ -1,4 +1,4 @@
-package com.cohida.JudokaRegister;
+package com.cohida.JudokaRegister.Enums;
 
 public enum Obis {
     WHITE,

@@ -1,4 +1,4 @@
-package com.cohida.JudokaRegister;
+package com.cohida.JudokaRegister.Judokas;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

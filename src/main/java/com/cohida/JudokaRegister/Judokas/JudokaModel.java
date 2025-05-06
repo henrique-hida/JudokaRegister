@@ -17,11 +17,23 @@ public class JudokaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column (name = "id")
     private Long id;
+
+    @Column (name = "name")
     private String name;
+
+    @Column (name = "weight")
     private float weight;
+
+    @Column (name = "age")
     private int age;
+
+    @Column (name = "country")
     private Countries country;
+
+    @Column (name = "belt")
     private Obis belt;
 
     // Um judoka pode participar somente de um campeonato por vez

@@ -2,6 +2,7 @@ package com.cohida.JudokaRegister.Championships;
 
 import com.cohida.JudokaRegister.Enums.Countries;
 import com.cohida.JudokaRegister.Judokas.JudokaModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,7 @@ public class ChampionshipModel {
 
     // Um campeonato pode ter vários judokas
     @OneToMany(mappedBy = "championship")
+    @JsonIgnore
     private List<JudokaModel> judokas;
 
 

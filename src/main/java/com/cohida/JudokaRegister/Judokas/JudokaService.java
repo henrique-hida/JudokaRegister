@@ -3,6 +3,7 @@ package com.cohida.JudokaRegister.Judokas;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JudokaService {
@@ -19,7 +20,8 @@ public class JudokaService {
     }
 
     // List judoka by ID
-    public JudokaModel showJudokaByID() {
-        return judokaRepository.findById();
+    public JudokaModel showJudokaByID(Long id) {
+        Optional<JudokaModel> judokaById = judokaRepository.findById(id);
+        return judokaById.orElse(null);
     }
 }

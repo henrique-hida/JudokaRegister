@@ -21,9 +21,9 @@ public class JudokaController {
     }
 
     // Find judoka by ID (READ)
-    @GetMapping("/list")
-    public JudokaModel showJudokaById() {
-        return judokaService.showJudokaByID();
+    @GetMapping("/list/{id}")
+    public JudokaModel showJudokaById(@PathVariable Long id) {
+        return judokaService.showJudokaByID(id);
     }
 
     // Add judoka (CREATE)

@@ -28,8 +28,8 @@ public class JudokaController {
 
     // Add judoka (CREATE)
     @PostMapping("/create")
-    public String newJudoka() {
-        return "Judoka criado";
+    public JudokaModel newJudoka(@RequestBody JudokaModel judoka) {
+        return judokaService.newJudoka(judoka);
     }
 
     // Alter judoka data (UPDATE)

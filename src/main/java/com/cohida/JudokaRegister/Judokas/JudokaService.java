@@ -24,4 +24,9 @@ public class JudokaService {
         Optional<JudokaModel> judokaById = judokaRepository.findById(id);
         return judokaById.orElse(null);
     }
+
+    // Create a new judoka
+    public JudokaModel newJudoka(JudokaModel judoka) {
+        return judokaRepository.save(judoka);
+    }
 }

@@ -2,20 +2,28 @@ package com.cohida.JudokaRegister.Judokas;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("judokas")
 public class JudokaController {
 
-    // Show all judokas (READ)
-    @GetMapping("/list")
-    public String showAllJudokas() {
-        return "Todos os judokas";
+    private JudokaService judokaService;
+
+    public JudokaController(JudokaService judokaService) {
+        this.judokaService = judokaService;
     }
 
-    // Find judoka by (READ)
-    @GetMapping("/listID")
-    public String showAllJudokasById() {
-        return "Judoka por ID";
+    // Show all judokas (READ)
+    @GetMapping("/list")
+    public List<JudokaModel> showAllJudokas() {
+        return judokaService.showAllJudokas();
+    }
+
+    // Find judoka by ID (READ)
+    @GetMapping("/list")
+    public JudokaModel showJudokaById() {
+        return judokaService.showJudokaByID();
     }
 
     // Add judoka (CREATE)

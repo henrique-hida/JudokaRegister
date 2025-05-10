@@ -30,6 +30,15 @@ public class JudokaService {
         return judokaRepository.save(judoka);
     }
 
+    // Update judoka
+    public JudokaModel updateJudoka(Long id, JudokaModel judokaUpdated) {
+       if(judokaRepository.existsById(id)) {
+           judokaUpdated.setId(id);
+           return judokaRepository.save(judokaUpdated);
+       }
+       return null;
+    }
+
     // Delete judoka
     public void deleteJudoka(Long id) {
         judokaRepository.deleteById(id);

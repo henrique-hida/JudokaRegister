@@ -32,10 +32,10 @@ public class JudokaController {
         return judokaService.newJudoka(judoka);
     }
 
-    // Alter judoka data (UPDATE)
-    @PutMapping("/change")
-    public String alterJudoka() {
-        return "Judoka alterado";
+    // Update judoka data (UPDATE)
+    @PutMapping("/change/{id}")
+    public JudokaModel updateJudoka(@PathVariable Long id, @RequestBody JudokaModel judokaUpdated) {
+        return judokaService.updateJudoka(id, judokaUpdated);
     }
 
     // Delete judoka (DELETE)

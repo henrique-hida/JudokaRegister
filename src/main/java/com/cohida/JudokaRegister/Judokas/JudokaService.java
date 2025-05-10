@@ -29,4 +29,9 @@ public class JudokaService {
     public JudokaModel newJudoka(JudokaModel judoka) {
         return judokaRepository.save(judoka);
     }
+
+    // Delete judoka
+    public void deleteJudoka(Long id) {
+        judokaRepository.deleteById(id);
+    }
 }

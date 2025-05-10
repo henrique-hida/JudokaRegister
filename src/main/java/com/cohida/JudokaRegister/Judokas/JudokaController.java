@@ -39,9 +39,9 @@ public class JudokaController {
     }
 
     // Delete judoka (DELETE)
-    @DeleteMapping("/delete")
-    public String deleteJudoka() {
-        return "Judoka deletado";
+    @DeleteMapping("/delete/{id}")
+    public void deleteJudoka(@PathVariable Long id) {
+        judokaService.deleteJudoka(id);
     }
 
 }

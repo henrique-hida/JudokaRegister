@@ -17,7 +17,6 @@ public class JudokaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column (name = "id")
     private Long id;
 
@@ -36,11 +35,12 @@ public class JudokaModel {
     @Column (name = "belt")
     private Obis belt;
 
-    // Um judoka pode participar somente de um campeonato por vez
-    @ManyToOne
-    @JoinColumn(name = "championship_id") // FK
-    private ChampionshipModel championship;
+    @Column (name = "rank")
+    private String rank;
 
+    @ManyToOne
+    @JoinColumn(name = "championship_id")
+    private ChampionshipModel championship;
 
 }
 

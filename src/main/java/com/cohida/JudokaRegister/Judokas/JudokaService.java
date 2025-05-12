@@ -9,9 +9,15 @@ import java.util.Optional;
 public class JudokaService {
 
     private JudokaRepository judokaRepository;
+    private JudokaMapper judokaMapper;
 
     public JudokaService(JudokaRepository judokaRepository) {
         this.judokaRepository = judokaRepository;
+    }
+
+    public JudokaService(JudokaRepository judokaRepository, JudokaMapper judokaMapper) {
+        this.judokaRepository = judokaRepository;
+        this.judokaMapper = judokaMapper;
     }
 
     // List all judokas
@@ -26,8 +32,10 @@ public class JudokaService {
     }
 
     // Create a new judoka
-    public JudokaModel newJudoka(JudokaModel judoka) {
-        return judokaRepository.save(judoka);
+    public JudokaDTO newJudoka(JudokaDTO judokaDTO) {
+        JudokaModel judoka = judokaMapper.map(judokaDTO);
+        judoka = judokaRepository.save(judoka);
+        return judokaMapper.map(judoka);
     }
 
     // Update judoka

@@ -28,7 +28,7 @@ public class JudokaController {
 
     // Add judoka (CREATE)
     @PostMapping("/create")
-    public JudokaModel newJudoka(@RequestBody JudokaModel judoka) {
+    public JudokaDTO newJudoka(@RequestBody JudokaDTO judoka) {
         return judokaService.newJudoka(judoka);
     }
 

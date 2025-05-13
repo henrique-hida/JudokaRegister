@@ -8,7 +8,7 @@ import java.util.List;
 @RequestMapping("judokas")
 public class JudokaController {
 
-    private JudokaService judokaService;
+    private final JudokaService judokaService;
 
     public JudokaController(JudokaService judokaService) {
         this.judokaService = judokaService;

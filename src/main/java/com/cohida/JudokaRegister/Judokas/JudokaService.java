@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 @Service
 public class JudokaService {
 
-    private JudokaRepository judokaRepository;
-    private JudokaMapper judokaMapper;
+    private final JudokaRepository judokaRepository;
+    private final JudokaMapper judokaMapper;
 
     public JudokaService(JudokaRepository judokaRepository, JudokaMapper judokaMapper) {
         this.judokaRepository = judokaRepository;

@@ -1,5 +1,4 @@
 package com.cohida.JudokaRegister.Championships;
-
 import com.cohida.JudokaRegister.Enums.Countries;
 import com.cohida.JudokaRegister.Judokas.JudokaModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -7,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import lombok.ToString;
 import java.util.List;
 
 @Entity
@@ -15,6 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class ChampionshipModel {
 
     @Id

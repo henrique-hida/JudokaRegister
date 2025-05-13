@@ -1,4 +1,6 @@
 package com.cohida.JudokaRegister.Judokas;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -14,32 +16,54 @@ public class JudokaController {
 
     // Show all judokas (READ)
     @GetMapping("/list")
-    public List<JudokaDTO> showAllJudokas() {
-        return judokaService.showAllJudokas();
+    public ResponseEntity<List<JudokaDTO>> showAllJudokas() {
+        List<JudokaDTO> judokas = judokaService.showAllJudokas();
+        return ResponseEntity.ok(judokas);
     }
 
     // Find judoka by ID (READ)
     @GetMapping("/list/{id}")
-    public JudokaDTO showJudokaById(@PathVariable Long id) {
-        return judokaService.showJudokaByID(id);
+    public ResponseEntity<?> showJudokaById(@PathVariable Long id) {
+        JudokaDTO judokaById = judokaService.showJudokaByID(id);
+        if (judokaById != null) {
+            return ResponseEntity.ok(judokaById);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Judoka não encontrado");
+        }
     }
 
     // Add judoka (CREATE)
     @PostMapping("/create")
-    public JudokaDTO newJudoka(@RequestBody JudokaDTO judoka) {
-        return judokaService.newJudoka(judoka);
+    public ResponseEntity<String> newJudoka(@RequestBody JudokaDTO judoka) {
+        JudokaDTO newJudoka = judokaService.newJudoka(judoka);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Judoka cadastrado com sucesso: " + newJudoka.getName());
     }
 
     // Update judoka data (UPDATE)
     @PutMapping("/change/{id}")
-    public JudokaDTO updateJudoka(@PathVariable Long id, @RequestBody JudokaDTO judokaUpdated) {
-        return judokaService.updateJudoka(id, judokaUpdated);
+    public ResponseEntity<?> updateJudoka(@PathVariable Long id, @RequestBody JudokaDTO judokaUpdated) {
+        JudokaDTO updatedJudoka = judokaService.updateJudoka(id, judokaUpdated);
+        if (updatedJudoka != null) {
+            return ResponseEntity.ok(updatedJudoka);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Judoka não encontrado");
+        }
+
     }
 
     // Delete judoka (DELETE)
     @DeleteMapping("/delete/{id}")
-    public void deleteJudoka(@PathVariable Long id) {
-        judokaService.deleteJudoka(id);
+    public ResponseEntity<String> deleteJudoka(@PathVariable Long id) {
+        if (judokaService.showJudokaByID(id) != null) {
+            judokaService.deleteJudoka(id);
+            return ResponseEntity.ok("Judoka deletado com sucesso!");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Judoka não encontrado");
+        }
     }
 
 }

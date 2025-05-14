@@ -15,9 +15,17 @@ public class JudokaDTO {
     private String name;
     private float weight;
     private int age;
-    private Countries country;
-    private Obis belt;
+    private Integer country;
+    private Integer belt;
     private String rank;
     private ChampionshipModel championship;
+
+    public Countries getCountryEnum() {
+        return country != null ? Countries.fromId(country) : null;
+    }
+
+    public Obis getBeltEnum() {
+        return belt != null ? Obis.fromId(belt) : null;
+    }
 
 }

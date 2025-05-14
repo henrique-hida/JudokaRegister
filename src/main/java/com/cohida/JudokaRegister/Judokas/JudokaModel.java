@@ -32,10 +32,10 @@ public class JudokaModel {
     private int age;
 
     @Column (name = "country")
-    private Countries country;
+    private int country;
 
     @Column (name = "belt")
-    private Obis belt;
+    private int belt;
 
     @Column (name = "rank")
     private String rank;

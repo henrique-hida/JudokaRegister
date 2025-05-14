@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Judoka Details</title>
+    <style>
+        :root {
+            --green: #61e786;
+            --light-green: #8affb3;
+            --dgreen: #278240;
+            --white: #ffffff;
+            --gray: #272d2d;
+            --black: #0e1010;
+            --neuwhite: #eaecf0;
+            --neublack: #2e3239;
+            --bglow: #35393f;
+            --bshadow: #23262a;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--black);
+            color: var(--neuwhite);
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--green);
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--green);
+            border-bottom: 1px solid var(--dgreen);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--green);
+            margin-top: 2rem;
+        }
+
+        .details-container {
+            background-color: var(--neublack);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px var(--bshadow);
+            margin-bottom: 2rem;
+        }
+
+        p {
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: var(--green);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--bglow);
+            margin-top: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background-color: var(--dgreen);
+            padding: 12px 15px;
+            text-align: left;
+            color: var(--white);
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--green);
+            border-radius: 4px;
+        }
+
+        a:hover {
+            color: var(--light-green);
+            border-color: var(--light-green);
+        }
+
+        @media (max-width: 768px) {
+            .details-container {
+                padding: 1rem;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            th {
+                display: none;
+            }
+
+            td {
+                padding: 0.5rem;
+                position: relative;
+                padding-left: 50%;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0.5rem;
+                font-weight: bold;
+                color: var(--green);
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Judoka Details</h1>
+<div class="details-container">
+    <h2 th:text="${judoka.name}"></h2>
+    <p><strong>Weight:</strong> <span th:text="${judoka.weight}"></span> kg</p>
+    <p><strong>Age:</strong> <span th:text="${judoka.age}"></span> years</p>
+    <p><strong>Country:</strong> <span th:text="${judoka.countryName}"></span></p>
+    <p><strong>Belt:</strong> <span th:text="${judoka.beltName}"></span></p>
+    <p><strong>Rank:</strong> <span th:text="${judoka.rank}"></span></p>
+
+    <h3>Championships:</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Country</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="championship : ${judoka.championship}">
+            <td th:text="${championship.name}"></td>
+            <td th:text="${championship.country}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<a href="/judokas/ui/list">Back to judoka list</a>
+</body>
+</html>

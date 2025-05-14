@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Judokas Table</title>
+    <style>
+        :root {
+            --green: #61e786;
+            --light-green: #8affb3;
+            --dgreen: #278240;
+            --white: #ffffff;
+            --gray: #272d2d;
+            --black: #0e1010;
+            --neuwhite: #eaecf0;
+            --neublack: #2e3239;
+            --bglow: #35393f;
+            --bshadow: #23262a;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--black);
+            color: var(--neuwhite);
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--green);
+            margin-bottom: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--neublack);
+            box-shadow: 0 0 10px var(--bshadow);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: var(--dgreen);
+        }
+
+        th {
+            padding: 12px 15px;
+            text-align: left;
+            color: var(--white);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--gray);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: var(--bglow);
+        }
+
+        td {
+            padding: 12px 15px;
+            color: var(--neuwhite);
+        }
+
+        td:last-child {
+            display: flex;
+            gap: 10px;
+        }
+
+        a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        a:hover {
+            color: var(--light-green);
+            background-color: rgba(97, 231, 134, 0.1);
+        }
+
+        .btn-adicionar {
+            display: inline-block;
+            background-color: var(--green);
+            color: var(--black);
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-adicionar:hover {
+            background-color: var(--light-green);
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid var(--gray);
+                border-radius: 8px;
+                padding: 10px;
+                background-color: var(--neublack);
+            }
+
+            th {
+                display: none;
+            }
+
+            td {
+                position: relative;
+                padding-left: 50%;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                font-weight: bold;
+                color: var(--green);
+            }
+
+            td:last-child {
+                display: block;
+                padding-left: 15px;
+            }
+
+            td:last-child a {
+                display: inline-block;
+                margin: 0.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Judokas List</h1>
+<a class="btn-adicionar" th:href="@{/judokas/ui/add}">Adicionar novo judoka</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Weight</th>
+        <th>Age</th>
+        <th>Country</th>
+        <th>Belt</th>
+        <th>Rank</th>
+        <th>Championship</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="judoka : ${judokas}">
+        <td th:text="${judoka.id}"></td>
+        <td th:text="${judoka.name}"></td>
+        <td th:text="${judoka.weight}"></td>
+        <td th:text="${judoka.age}"></td>
+        <td th:text="${judoka.country}"></td>
+        <td th:text="${judoka.belt}"></td>
+        <td th:text="${judoka.rank}"></td>
+        <td>
+            <span th:if="${judoka.championship}"><span th:text="${judoka.championship.name}"></span>, </span>
+            <span th:if="${judoka.championship == null}">No registered championship</span>
+        </td>
+        <td>
+            <a th:href="@{/judokas/ui/details/{id}(id=${judoka.id})}">Details</a>
+            <a th:href="@{/judokas/ui/#/{id}(id=${judoka.id})}">Edit</a>
+            <a th:href="@{/judokas/ui/delete/{id}(id=${judoka.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

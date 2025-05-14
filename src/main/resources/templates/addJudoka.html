@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Add Judoka</title>
+    <style>
+        :root {
+            --green: #61e786;
+            --light-green: #8affb3;
+            --dgreen: #278240;
+            --white: #ffffff;
+            --gray: #272d2d;
+            --black: #0e1010;
+            --neuwhite: #eaecf0;
+            --neublack: #2e3239;
+            --bglow: #35393f;
+            --bshadow: #23262a;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--black);
+            color: var(--neuwhite);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--green);
+            margin-bottom: 2rem;
+        }
+
+        .form-container {
+            background-color: var(--neublack);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px var(--bshadow);
+        }
+
+        .mensagem {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            background-color: var(--dgreen);
+            color: var(--white);
+        }
+
+        form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--green);
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--bglow);
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            color: var(--neuwhite);
+            font-size: 1rem;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--bglow);
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            color: var(--neuwhite);
+            font-size: 1rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2361e786'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1.5rem;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+
+        button {
+            background-color: var(--green);
+            color: var(--black);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: var(--light-green);
+        }
+
+        a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--green);
+            border-radius: 4px;
+        }
+
+        a:hover {
+            color: var(--light-green);
+            border-color: var(--light-green);
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Add new Judoka</h1>
+<div class="form-container">
+    <div th:if="${mensagem}" class="mensagem" th:text="${mensagem}"></div>
+    <form th:action="@{/judokas/ui/save}" th:object="${judoka}" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" required />
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" th:field="*{weight}" step="0.01" min="0" required />
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" th:field="*{age}" required />
+
+        <label for="country">Country:</label>
+        <select id="country" name="country" required>
+            <option value="">-- Select Country --</option>
+            <option th:each="country : ${T(com.cohida.JudokaRegister.Enums.Countries).values()}"
+                    th:value="${country.id}"
+                    th:text="${country.displayName}"
+                    th:selected="${judoka?.country == country.id}"></option>
+        </select>
+
+        <label for="belt">Belt:</label>
+        <select id="belt" name="belt">
+            <option value="">-- Select Belt --</option>
+            <option th:each="belt : ${T(com.cohida.JudokaRegister.Enums.Obis).values()}"
+                    th:value="${belt.id}"
+                    th:text="${belt.displayName}"
+                    th:selected="${judoka?.belt == belt.id}"></option>
+        </select>
+
+        <label for="rank">Rank:</label>
+        <input type="text" id="rank" th:field="*{rank}" />
+
+        <button type="submit">Register Judoka</button>
+    </form>
+    <a th:href="@{/judokas/ui/list}">Back to judoka list</a>
+</div>
+</body>
+</html>

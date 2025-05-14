@@ -32,6 +32,8 @@ public class JudokaService {
     // Create a new judoka
     public JudokaDTO newJudoka(JudokaDTO judokaDTO) {
         JudokaModel judoka = judokaMapper.map(judokaDTO);
+        judoka.setCountry(judokaDTO.getCountry());
+        judoka.setBelt(judokaDTO.getBelt());
         judoka = judokaRepository.save(judoka);
         return judokaMapper.map(judoka);
     }

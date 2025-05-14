@@ -29,7 +29,7 @@ public class JudokaController {
             return ResponseEntity.ok(judokaById);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Judoka não encontrado");
+                    .body("Judoka not found");
         }
     }
 
@@ -38,7 +38,7 @@ public class JudokaController {
     public ResponseEntity<String> newJudoka(@RequestBody JudokaDTO judoka) {
         JudokaDTO newJudoka = judokaService.newJudoka(judoka);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Judoka cadastrado com sucesso: " + newJudoka.getName());
+                .body("Judoka registered successfully!: " + newJudoka.getName());
     }
 
     // Update judoka data (UPDATE)
@@ -49,7 +49,7 @@ public class JudokaController {
             return ResponseEntity.ok(updatedJudoka);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Judoka não encontrado");
+                    .body("Judoka not found");
         }
 
     }
@@ -59,10 +59,10 @@ public class JudokaController {
     public ResponseEntity<String> deleteJudoka(@PathVariable Long id) {
         if (judokaService.showJudokaByID(id) != null) {
             judokaService.deleteJudoka(id);
-            return ResponseEntity.ok("Judoka deletado com sucesso!");
+            return ResponseEntity.ok("Judoka deleted successfully!");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Judoka não encontrado");
+                    .body("Judoka not found");
         }
     }
 
